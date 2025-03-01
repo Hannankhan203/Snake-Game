@@ -1,36 +1,43 @@
+// Calling all HTML Elements
 const body = document.querySelector("body");
 const themeCheckbox = document.querySelector("#theme-checkbox");
 const check = document.querySelector(".check");
 const botn = document.querySelector(".botn");
 const gameBoard = document.querySelector(".game-board");
-const highestScore = document.querySelector(".highest-score");
 const score = document.querySelector(".score");
+const highestScore = document.querySelector(".highest-score");
 
+// Adding Light Mode
 body.classList.add("light-mode");
 check.classList.add("light-mode");
 botn.classList.add("light-mode");
 gameBoard.classList.add("light-mode");
-highestScore.classList.add("light-mode");
 score.classList.add("light-mode");
+highestScore.classList.add("light-mode");
 
-function toggle() {
+// Dark Mode Toggle Function
+function toggleMode() {
+  body.classList.toggle("dark-mode");
   check.classList.toggle("dark-mode");
   botn.classList.toggle("dark-mode");
-  body.classList.toggle("dark-mode");
   gameBoard.classList.toggle("dark-mode");
-  highestScore.classList.toggle("dark-mode");
   score.classList.toggle("dark-mode");
+  highestScore.classList.toggle("dark-mode");
 }
 
-themeCheckbox.addEventListener("click", toggle);
+// Toggle Button Event
+themeCheckbox.addEventListener("click", toggleMode);
 
+// Main Game
+// Declaring Variables
 let snake = [{ x: 10, y: 10 }];
 let direction = { x: 0, y: 0 };
-let generateFood = randomFoodPosition();
 let currentScore = 0;
+let food = randomFoodPosition();
 let highScore = localStorage.getItem("highest-score") || 0;
-highestScore.innerHTML = `Highest ${highScore}`;
+highestScore.innerHTML = `Highscore ${highScore}`;
 
+// Making Keyboard Buttons Functional
 window.addEventListener("keydown", function (e) {
   const key = e.key;
   let newDirection;
@@ -43,7 +50,6 @@ window.addEventListener("keydown", function (e) {
   } else if (key === "ArrowRight") {
     newDirection = { x: 1, y: 0 };
   }
-
   if (
     newDirection &&
     (newDirection.x !== -direction.x || newDirection.y !== -direction.y)
@@ -52,6 +58,7 @@ window.addEventListener("keydown", function (e) {
   }
 });
 
+// Generating Food Randomly
 function randomFoodPosition() {
   let newFoodPosition;
   do {
@@ -68,21 +75,22 @@ function randomFoodPosition() {
   return newFoodPosition;
 }
 
+// Drawing Elements
 function drawElement(position, className) {
-  var element = document.createElement("div");
+  let element = document.createElement("div");
   element.style.gridRowStart = position.y;
   element.style.gridColumnStart = position.x;
   element.classList.add(className);
   gameBoard.appendChild(element);
 }
 
+// Drawing Game
 function drawGame() {
   gameBoard.innerHTML = "";
-  drawElement(generateFood, "food");
-
+  drawElement(food, "food");
   for (let i = 0; i < snake.length; i++) {
     let item = snake[i];
-    if (i === 0) {
+    if (i == 0) {
       drawElement(item, "head");
     } else {
       drawElement(item, "tail");
@@ -90,6 +98,7 @@ function drawGame() {
   }
 }
 
+// Moving the Snake
 function moveSnake() {
   let newHead = { x: snake[0].x + direction.x, y: snake[0].y + direction.y };
   if (
@@ -105,28 +114,30 @@ function moveSnake() {
 
   snake.unshift(newHead);
 
-  if (newHead.x === generateFood.x && newHead.y === generateFood.y) {
-    generateFood = randomFoodPosition();
+  if(newHead.x === food.x && newHead.y === food.y) {
+    food = randomFoodPosition();
     currentScore += 10;
     score.innerHTML = `Score ${currentScore}`;
-    if (currentScore > highScore) {
-      highScore = currentScore;
-      localStorage.setItem("highest-score", highScore);
-      highestScore.innerHTML = `Highest ${highScore}`;
+    if(currentScore > highScore) {
+        highScore = currentScore;
+        highScore = localStorage.setItem("highest-score", highScore);
+        highestScore.innerHTML = `highscore ${highScore}`;
     }
   } else {
     snake.pop();
-  }
+}
 }
 
+// Reset Game
 function resetGame() {
-  snake = [{ x: 10, y: 10 }];
-  direction = { x: 0, y: 0 };
-  currentScore = 0;
-  score.innerHTML = `Score ${currentScore}`;
+    snake = [{x: 10, y: 10}];
+    direction = {x: 0, y: 0};
+    currentScore = 0;
+    score.innerHTML = `Score ${currentScore}`;
 }
 
-setInterval(function () {
-  drawGame();
-  moveSnake();
+// Making the Game Loop
+setInterval(function() {
+    drawGame();
+    moveSnake();
 }, 300);
