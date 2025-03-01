@@ -124,7 +124,7 @@ function moveSnake() {
     score.innerHTML = `Score ${currentScore}`;
     if(currentScore > highScore) {
         highScore = currentScore;
-        highScore = localStorage.setItem("highest-score", highScore);
+        localStorage.setItem("highest-score", highScore);
         highestScore.innerHTML = `highscore ${highScore}`;
     }
   } else {
