@@ -6,6 +6,10 @@ const botn = document.querySelector(".botn");
 const gameBoard = document.querySelector(".game-board");
 const score = document.querySelector(".score");
 const highestScore = document.querySelector(".highest-score");
+const upButton = document.querySelector(".up");
+const downButton = document.querySelector(".down");
+const leftButton = document.querySelector(".left");
+const rightButton = document.querySelector(".right");
 
 // Adding Light Mode
 body.classList.add("light-mode");
@@ -141,3 +145,32 @@ setInterval(function() {
     drawGame();
     moveSnake();
 }, 300);
+
+// Controls for touch screen devices
+upButton.addEventListener("click", () => {
+  const newDirection = {x: 0, y: -1};
+  if(newDirection.x !== -direction.x || newDirection.y !== -direction.y) {
+    direction = newDirection;
+  }
+});
+
+downButton.addEventListener("click", () => {
+  const newDirection = {x: 0, y: 1};
+  if(newDirection.x !== -direction.x || newDirection.y !== -direction.y) {
+    direction = newDirection;
+  }
+});
+
+leftButton.addEventListener("click", () => {
+  const newDirection = {x: -1, y: 0};
+  if(newDirection.x !== -direction.x || newDirection.y !== -direction.y) {
+    direction = newDirection;
+  }
+});
+
+rightButton.addEventListener("click", () => {
+  const newDirection = {x: 1, y: 0};
+  if(newDirection.x !== -direction.x || newDirection.y !== -direction.y) {
+    direction = newDirection;
+  }
+});

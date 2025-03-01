@@ -183,3 +183,7 @@ label input:checked ~ .botn {
   height: 20px;
   border-radius: 5px;
 }
+
+.hide {
+  display: none
+}
