@@ -1,0 +1,112 @@
+label {
+  width: 30px;
+  height: 15px;
+}
+
+label input {
+  width: 30px; /* Custom checkbox size */
+  height: 15px;
+}
+
+label .botn {
+  width: 15px;
+  height: 15px;
+}
+
+label .botn::before {
+  width: 6px;
+  height: 15px;
+}
+
+label .botn::after {
+  width: 6px;
+  height: 15px;
+}
+
+label input:checked ~ .botn {
+  left: 15px;
+}
+
+.container {
+  height: min-content;
+  justify-content: start;
+  gap: 1.5rem;
+}
+
+.game-board {
+  border: 8px solid grey;
+  width: 80vw;
+  height: 40vh;
+}
+
+.highest-score,
+.score {
+  font-size: 18px;
+  padding: 4px;
+  width: 300px;
+}
+
+.head {
+  width: 15px;
+  height: 15px;
+}
+
+.tail {
+  width: 15px;
+  height: 15px;
+}
+
+.food {
+  width: 15px;
+  height: 15px;
+}
+
+.hide {
+  display: block;
+}
+
+.touch-screen-btns {
+  /* border: 2px solid black; */
+  padding: 5px;
+  display: grid;
+  grid-template-areas:
+    ". up ."
+    "left . right"
+    ". down .";
+  gap: 10px;
+  position: absolute;
+  top: 65%;
+}
+
+.touch-screen-btn {
+  width: 60px;
+  height: 60px;
+  font-size: 24px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.3s;
+}
+
+.touch-screen-btn:active {
+  transform: scale(0.95);
+}
+
+.up {
+  grid-area: up;
+}
+
+.down {
+  grid-area: down;
+}
+
+.left {
+  grid-area: left;
+}
+
+.right {
+  grid-area: right;
+}
